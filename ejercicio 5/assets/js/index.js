@@ -19,7 +19,21 @@ fetch("https://dev4humans.com.mx/api/Clases/ventas_libros")
         datasets: [{
           label: 'Promedio de Ventas diarias',
           data: data,
-          borderWidth: 1
+          borderWidth: 1,
+          borderColor: [
+            "#3677D4",
+            "#5fd436",
+            "#d436c5",
+            "#d43636",
+            "#d1d436"
+          ],
+          backgroundColor:[
+            "#3677D4",
+            "#5fd436",
+            "#d436c5",
+            "#d43636",
+            "#d1d436"
+          ],
         }]
       },
       options: {
