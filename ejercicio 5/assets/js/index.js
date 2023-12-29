@@ -35,14 +35,25 @@ fetch("https://dev4humans.com.mx/api/Clases/ventas_libros")
   tbody.innerHTML= "";
   labels.forEach((label,index) => {
    console.log(label);
-   tbody.innerHTML += `
-    <tr>
-      <th >${index + 1}</th>
+   //tbody.innerHTML += `
+    //<tr>
+      //<th >${index + 1}</th>
+      //<td>${label}</td>
+      //<td>${data[index]}</td>                  
+   //</tr>
+    //`;
+
+    const tr = document.createElement("tr");
+    if (data[index] >= 50){
+      tr.classList.add("table-success");
+    }
+    tr.innerHTML=`
+      <td >${index + 1}</td>
       <td>${label}</td>
-      <td>${data[index]}</td>                  
-   </tr>
+      <td>${data[index]}</td>
     `;
-});
+    tbody.appendChild(tr);
+  });
 
 
 });
