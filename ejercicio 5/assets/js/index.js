@@ -36,7 +36,7 @@ fetch("https://dev4humans.com.mx/api/Clases/ventas_libros")
   labels.forEach((label,index) => {
    console.log(label);
    //tbody.innerHTML += `
-    //<tr>
+    //<tr ${data[index] >=50 ? 'class="table-danger fw-bold"' : ''}>
       //<th >${index + 1}</th>
       //<td>${label}</td>
       //<td>${data[index]}</td>                  
@@ -46,6 +46,7 @@ fetch("https://dev4humans.com.mx/api/Clases/ventas_libros")
     const tr = document.createElement("tr");
     if (data[index] >= 50){
       tr.classList.add("table-success");
+      tr.classList.add("fw-bold");
     }
     tr.innerHTML=`
       <td >${index + 1}</td>
