@@ -1,41 +1,29 @@
 //ENDPOINT: https://dev4humans.com.mx/api/Clases/ventas_libros
 
 const tbody = document.getElementById('tbody');
-const headers =new Headers();
+const headers = new Headers();
+headers.append('Content-Type', "application/json");
+headers.append('Authorization', "9faa4f2eed9b6c5f9a748d54ed32cc90");
+fetch("https://dev4humans.com.mx/api/Clases/ventas_variadas", 
+{
+  method: 'GET',
+  headers: headers
 
-fetch("https://dev4humans.com.mx/api/Clases/ventas_variadas")
+})
   .then(response => response.json())
   .then(datosApi => {
-   console.log(datosApi);
+   //console.log(datosApi);
     const ctx = document.getElementById('myChart');
 
     const labels = datosApi.data.labels;
-    const data =datosApi.data.data;
+    const datasets = datosApi.data.datasets;
 
     // creacion de grafica
    new Chart(ctx, {
       type: 'bar',
       data: {
        labels: labels,
-        datasets: [{
-          label: 'Promedio de Ventas diarias',
-          data: data,
-          borderWidth: 1,
-          borderColor: [
-            "#3677D4",
-            "#5fd436",
-            "#d436c5",
-            "#d43636",
-            "#d1d436"
-          ],
-          backgroundColor:[
-            "#3677D4",
-            "#5fd436",
-            "#d436c5",
-            "#d43636",
-            "#d1d436"
-          ],
-        }]
+        datasets: datasets
       },
       options: {
           scales: {
@@ -47,16 +35,10 @@ fetch("https://dev4humans.com.mx/api/Clases/ventas_variadas")
   });
 
   //creacion de datos de tabla
+  const data =  datasets[0];
   tbody.innerHTML= "";
   labels.forEach((label,index) => {
    console.log(label);
-   //tbody.innerHTML += `
-    //<tr ${data[index] >=50 ? 'class="table-danger fw-bold"' : ''}>
-      //<th >${index + 1}</th>
-      //<td>${label}</td>
-      //<td>${data[index]}</td>                  
-   //</tr>
-    //`;
 
     const tr = document.createElement("tr");
     if (data[index] >= 50){
@@ -66,7 +48,7 @@ fetch("https://dev4humans.com.mx/api/Clases/ventas_variadas")
     tr.innerHTML=`
       <td >${index + 1}</td>
       <td>${label}</td>
-      <td>${data[index]}</td>
+      <td>${data.data[index]}</td>
     `;
     tbody.appendChild(tr);
   });
